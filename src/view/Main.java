@@ -27,41 +27,19 @@ public class Main {
             switch (choice) {
                 case 1:
                 case 3:
-                    HouseHold houseHold = createHouse();
-                    houseHoldList.add(houseHold);
-                    hanoi.setHouseHoldList(houseHoldList);
-                    hanoi.showAllHouseHold();
+                    creatHouse(houseHoldList, hanoi);
                     break;
                 case 2:
                     hanoi.showAllHouseHold();
                     break;
                 case 4:
-                    System.out.println("nhập vào số nhà muốn sửa");
-                    scanner.nextLine();
-                    String numHouse = scanner.nextLine();
-                    System.out.println("nhập số nhà mới");
-                    String newNumhouse = scanner.nextLine();
-                    HouseHold newHouse = creatPeople();
-                    newHouse.setNumHouse(newNumhouse);
-                    hanoi.editHouseHold(newNumhouse, newHouse);
-                    hanoi.showAllHouseHold();
+                    editHouse(scanner, hanoi);
                     break;
                 case 5:
-                    System.out.println("nhập vào số nhà muốn xóa");
-                    scanner.nextLine();
-                    String num = scanner.nextLine();
-                    hanoi.deleteHouseHold(num);
-                    hanoi.showAllHouseHold();
+                    deleteHouse(scanner, hanoi);
                     break;
                 case 6:
-                    System.out.println("nhập vào số nhà muốn tìm");
-                    scanner.nextLine();
-                    String numhouse1 = scanner.nextLine();
-                    HouseHold newH =hanoi.seachHouseHold(numhouse1);
-                    if (newH!=null){
-                        System.out.println(newH.toString());
-                    }else System.out.println("không tìm thấy");
-
+                    seachHouse(scanner, hanoi);
                     break;
                 case 7:
                     check = false;
@@ -71,6 +49,43 @@ public class Main {
                     System.out.println("nhập lại menu");
             }
         }
+    }
+
+    private static void seachHouse(Scanner scanner, Town hanoi) {
+        System.out.println("nhập vào số nhà muốn tìm");
+        scanner.nextLine();
+        String numhouse1 = scanner.nextLine();
+        HouseHold newH = hanoi.seachHouseHold(numhouse1);
+        if (newH!=null){
+            System.out.println(newH.toString());
+        }else System.out.println("không tìm thấy");
+    }
+
+    private static void deleteHouse(Scanner scanner, Town hanoi) {
+        System.out.println("nhập vào số nhà muốn xóa");
+        scanner.nextLine();
+        String num = scanner.nextLine();
+        hanoi.deleteHouseHold(num);
+        hanoi.showAllHouseHold();
+    }
+
+    private static void creatHouse(ArrayList<HouseHold> houseHoldList, Town hanoi) {
+        HouseHold houseHold = createHouse();
+        houseHoldList.add(houseHold);
+        hanoi.setHouseHoldList(houseHoldList);
+        hanoi.showAllHouseHold();
+    }
+
+    private static void editHouse(Scanner scanner, Town hanoi) {
+        System.out.println("nhập vào số nhà muốn sửa");
+        scanner.nextLine();
+        String numHouse = scanner.nextLine();
+        System.out.println("nhập số nhà mới");
+        String newNumhouse = scanner.nextLine();
+        HouseHold newHouse = creatPeople();
+        newHouse.setNumHouse(newNumhouse);
+        hanoi.editHouseHold(newNumhouse, newHouse);
+        hanoi.showAllHouseHold();
     }
 
     public static HouseHold createHouse() {                              //tao thong tin nguoi trong nha`
